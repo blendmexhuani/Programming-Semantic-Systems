@@ -1,0 +1,13 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://semantics.id/ns/example/movie#>
+SELECT DISTINCT ?director_name
+WHERE { ?movie rdf:type :Movie ;
+			   :hasMovieDirector ?director ;
+			   :hasFilmStudio ?filmStudio ;
+			   :hasReleaseDate ?releaseDate .
+		?director :hasName ?director_name .
+		?filmStudio rdfs:label "Walt Disney Pictures" .
+	FILTER (year(?releaseDate) >= 2016 && year(?releaseDate) <= 2018)
+}
+ORDER BY ASC(?director_name)

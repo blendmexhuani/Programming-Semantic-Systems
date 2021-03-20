@@ -1,0 +1,9 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <http://semantics.id/ns/example/movie#>
+SELECT ?title (count(?genre) as ?total_genres)
+WHERE { ?movie rdf:type :Movie ;
+         	   :hasGenre ?genre ;
+               rdfs:label ?title . }
+GROUP BY ?title
+HAVING (count(?genre) > 2)

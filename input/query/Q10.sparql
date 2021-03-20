@@ -1,0 +1,17 @@
+PREFIX : <http://semantics.id/ns/example/movie#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?name ?title
+WHERE {
+	?movie rdf:type :Movie ;
+		   rdfs:label ?title .
+	{ ?movie :hasActor ?actor .
+	  ?actor :hasName ?name . }
+	UNION
+	{ ?movie :hasWriter ?writer .
+	  ?writer :hasName ?name . }
+	UNION
+	{ ?movie :hasMovieDirector ?director .
+	  ?director :hasName ?name . }
+}
+ORDER BY ASC(?name)

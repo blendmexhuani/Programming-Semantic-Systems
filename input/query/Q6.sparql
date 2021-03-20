@@ -1,0 +1,8 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX : <http://semantics.id/ns/example/movie#>
+SELECT DISTINCT ?actor_name
+WHERE { ?movie rdf:type :Movie ;
+               :hasActor ?actor ;
+         	   :hasReleaseDate ?releaseDate .
+    	?actor :hasName ?actor_name .
+FILTER (year(?releaseDate) > 2016) }
